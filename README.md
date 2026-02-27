@@ -6,23 +6,44 @@ Gradio-based web interface for benchmarking and testing audio-to-text APIs.
 
 - Record audio via microphone or upload an audio file
 - Play back recorded/uploaded audio before submitting
-- Enter API key and endpoint at runtime
+- Two backends: **API** (remote) or **Local (faster-whisper)**
 - Transcribe audio to text
 - Translate audio to a target language
 - Performance metrics displayed after each request
 
+## Backends
+
+### API
+Sends audio to a remote HTTP endpoint. Requires an API key and endpoint URL. Supports translation to any target language.
+
+### Local (faster-whisper)
+Runs [faster-whisper](https://github.com/SYSTRAN/faster-whisper) entirely on-device using CTranslate2 — no API key or internet connection needed. Models are downloaded automatically from Hugging Face on first use.
+
+> **Translation note:** Local translation outputs **English only**. This is a limitation of the underlying Whisper model architecture. For other target languages, use the API backend.
+
+| Model Size | Speed | Accuracy |
+|---|---|---|
+| tiny | Fastest | Lowest |
+| base | Fast | Good |
+| small | Moderate | Better |
+| medium | Slow | High |
+| large-v2 / large-v3 | Slowest | Highest |
+
 ## Performance Metrics
 
-After each transcription or translation request, the app shows:
+After each request, the app shows:
 
 | Metric | Description |
 |---|---|
-| **Latency** | End-to-end API round-trip time (seconds) |
+| **Latency** | End-to-end processing time (seconds) |
 | **Audio Duration** | Length of the audio clip (seconds, WAV only) |
-| **Real-time Factor** | Latency ÷ Audio Duration — values below 1.0 mean faster-than-real-time processing |
-| **Audio File Size** | Size of the audio file sent to the API (KB) |
+| **Real-time Factor** | Latency ÷ Audio Duration — below 1.0 means faster-than-real-time |
+| **Audio File Size** | Size of the audio file (KB) |
+| **Detected Language** | Source language and confidence (local backend only) |
 
 ## Setup
+
+**Prerequisites:** [ffmpeg](https://ffmpeg.org/download.html) must be installed and on your PATH (required by faster-whisper for audio decoding).
 
 ```bash
 pip install -r requirements.txt
@@ -33,10 +54,12 @@ Then open `http://localhost:7860` in your browser.
 
 ## Usage
 
-1. Enter your **API Key** and **Endpoint** at the top
-2. Record audio with the microphone or upload a WAV/MP3/OGG file
-3. Click **Transcribe** to get a text transcript, or select a target language and click **Translate**
-4. View the result and performance metrics below
+1. Select a **Backend**: API or Local (faster-whisper)
+2. **API:** Enter your API Key and Endpoint
+   **Local:** Select a model size
+3. Record audio with the microphone or upload a WAV/MP3/OGG file
+4. Click **Transcribe** for a transcript, or select a target language and click **Translate**
+5. View the result and performance metrics below
 
 ## API Reference
 
