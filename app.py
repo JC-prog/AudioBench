@@ -116,14 +116,14 @@ def translate(audio_path, api_key, endpoint, target_language):
         return f"Error: {e}", ""
 
 
-with gr.Blocks(title="MERaLiON Audio API Tester") as demo:
-    gr.Markdown("# MERaLiON Audio API Tester")
+with gr.Blocks(title="AudioBench") as demo:
+    gr.Markdown("# AudioBench")
 
     with gr.Row():
         api_key = gr.Textbox(
             label="API Key",
             type="password",
-            placeholder="TTSH-...",
+            placeholder="Enter your API key",
         )
         endpoint = gr.Textbox(
             label="Endpoint",
