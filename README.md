@@ -1,12 +1,12 @@
 # AudioBench
 
-Gradio-based web interface for benchmarking and testing audio-to-text APIs, starting with the MERaLiON API.
+Gradio-based web interface for benchmarking and testing audio-to-text APIs.
 
 ## Features
 
 - Record audio via microphone or upload an audio file
 - Play back recorded/uploaded audio before submitting
-- Enter API key and endpoint at runtime (no hardcoding)
+- Enter API key and endpoint at runtime
 - Transcribe audio to text
 - Translate audio to a target language
 - Performance metrics displayed after each request
