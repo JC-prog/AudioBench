@@ -40,7 +40,7 @@ Then open `http://localhost:7860` in your browser.
 
 ## API Reference
 
-The app targets the MERaLiON API. Relevant endpoints:
+Expected endpoints:
 
 | Endpoint | Method | Purpose |
 |---|---|---|
